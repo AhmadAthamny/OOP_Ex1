@@ -1,42 +1,76 @@
+/**
+ * Game class is responsible for running a Game instance, including starting a game, managing player turns,
+ * and announcing a winner/tie accordingly.
+ */
 public class Game {
-
-    private static final int DEFAULT_BOARD_SIZE = 4;
     private static final int DEFAULT_REQUIRED_WIN_STREAK = 3;
 
     private Player playerX;
     private Player playerO;
     private Renderer boardRenderer;
-    private int boardSize;
     private int winStreak;
     private Board currentGameBoard;
 
+    /**
+     * Initializes a game instance, as well as initializes a board with default board size, and with
+     * default win streak.
+     * @param playerX Player instance of the first player.
+     * @param playerO Player instance of the second player
+     * @param renderer Renderer that will be used to render the board after each turn.
+     * @see Player
+     * @see Renderer
+     */
     public Game(Player playerX, Player playerO, Renderer renderer) {
         this.playerX = playerX;
         this.playerO = playerO;
         this.boardRenderer = renderer;
-        this.boardSize = DEFAULT_BOARD_SIZE;
         this.winStreak = DEFAULT_REQUIRED_WIN_STREAK;
+
+        // construct game board
+        this.currentGameBoard = new Board();
     }
 
+    /**
+     * Initializes a game instance, as well as initializes a board with the given board size and win streak.
+     * @param playerX Player instance of the first player.
+     * @param playerO Player instance of the second player
+     * @param size Size of the board.
+     * @param winStreak Win streak required for a player to win the game.
+     * @param renderer Renderer that will be used to render the board after each turn.
+     * @see Renderer
+     * @see Player
+     */
     public Game(Player playerX, Player playerO, int size, int winStreak, Renderer renderer) {
         this.playerX = playerX;
         this.playerO = playerO;
         this.boardRenderer = renderer;
-        this.boardSize = size;
         this.winStreak = winStreak;
+
+        // construct game board
+        this.currentGameBoard = new Board(size);
     }
 
+    /**
+     * A getter for the game's win streak
+     * @return The game's required win streak (int)
+     */
     public int getWinStreak() {
         return this.winStreak;
     }
 
+    /**
+     * A getter for the game's board size.
+     * @return Size of the board used in the game (int).
+     */
     public int getBoardSize() {
-        return this.boardSize;
+        return this.currentGameBoard.getSize();
     }
 
+    /**
+     * Runs the game's instance, from start to end, managing players' turns.
+     * @return Return the mark of the winner player (Mark).
+     */
     public Mark run() {
-        // construct new game board
-        this.currentGameBoard = new Board(this.boardSize);
 
         // current player variable to easily switch between players
         Player currPlayer = this.playerX;
@@ -77,8 +111,8 @@ public class Game {
     }
 
     private boolean isBoardFull() {
-        for(int i = 0; i < this.boardSize; i++) {
-            for(int j = 0; j < this.boardSize; j++) {
+        for(int i = 0; i < getBoardSize(); i++) {
+            for(int j = 0; j < getBoardSize(); j++) {
                 if (this.currentGameBoard.getMark(i, j) == Mark.BLANK) {
                     return false;
                 }
@@ -88,7 +122,7 @@ public class Game {
     }
 
     private int getMarkLongestStreak(Mark mark) {
-        int boardSize = this.currentGameBoard.getSize();
+        int boardSize = getBoardSize();
         int max = 0;
 
         // Rows
