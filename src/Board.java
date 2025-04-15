@@ -8,29 +8,34 @@
 public class Board {
     private static final int DEFAULT_BOARD_SIZE = 4;
 
-    private int boardSize;
-    private Mark[][] boardMatrix;
+    // Constants for default return values
+    private static final boolean SUCCESS = true;
+    private static final boolean FAIL = false;
+
+    private final int boardSize;
+    private final Mark[][] boardMatrix;
 
     /**
      * Default constructor, initializes board with size of DEFAULT_BOARD_SIZE (macro).
      */
     public Board() {
         this.boardSize = DEFAULT_BOARD_SIZE;
+        this.boardMatrix = new Mark[this.boardSize][this.boardSize];
         constructBoard();
     }
 
     /**
      * Class constructor that accepts the desired board size as an argument, and initializes a board with
      * the size provided.
-     * @param boardSize
+     * @param boardSize desired size of the board
      */
     public Board(int boardSize) {
         this.boardSize = boardSize;
+        this.boardMatrix = new Mark[this.boardSize][this.boardSize];
         constructBoard();
     }
 
     private void constructBoard() {
-        this.boardMatrix = new Mark[this.boardSize][this.boardSize];
         for (int i = 0; i < this.boardSize; i++) {
             for (int j = 0; j < this.boardSize; j++) {
                 this.boardMatrix[i][j] = Mark.BLANK;
@@ -54,11 +59,11 @@ public class Board {
      * @return returns true if mark was put successfully, otherwise returns false.
      */
     public boolean putMark(Mark mark, int row, int col) {
-        if (!isValidCoordination(row, col) || (getMark(row, col) != Mark.BLANK && mark != Mark.BLANK)) {
-            return false;
+        if (!isValidCoordinate(row, col) || (getMark(row, col) != Mark.BLANK && mark != Mark.BLANK)) {
+            return FAIL;
         }
         this.boardMatrix[row][col] = mark;
-        return true;
+        return SUCCESS;
     }
 
     /**
@@ -68,19 +73,13 @@ public class Board {
      * @return Mark which is present at the given coordinates.
      */
     public Mark getMark(int row, int col) {
-
-        // make sure coordinate is legal
-        if (!isValidCoordination(row, col)) {
+        if (!isValidCoordinate(row, col)) {
             return Mark.BLANK;
         }
-
         return this.boardMatrix[row][col];
     }
 
-    private boolean isValidCoordination(int row, int col) {
-        if (row < 0 || col < 0 || row >= boardSize || col >= boardSize) {
-            return false;
-        }
-        return true;
+    private boolean isValidCoordinate(int row, int col) {
+        return row >= 0 && col >= 0 && row < boardSize && col < boardSize;
     }
 }

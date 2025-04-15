@@ -19,7 +19,5 @@ CleverPlayer: Attempts to build a streak with at least 2 marks, the first attemp
 
  Question 3:
  Utilities:
- Description: It has a static function that given a board and a mark, it calculates the longest streak of the
- given mark in the given board in all directions.
- Why added it: I used the same function both in CleverPlayer and GeniusPlayer, and instead of duplicating the
- code in both classes, I moved it to a third class "Utilities" and both players use it.
+ Description: It has common static functions that are used in different classes in the project.
+ Why added it: To avoid code duplications, and to have a more readable code.

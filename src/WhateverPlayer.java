@@ -23,6 +23,6 @@ public class WhateverPlayer implements Player {
         int[] randomEmptyCoords = Utilities.pickRandomBoardEmptyCoords(board);
 
         // mark the board
-        board.putMark(mark, randomEmptyCoords[0], randomEmptyCoords[1]);
+        board.putMark(mark, randomEmptyCoords[Utilities.INDEX_ROW], randomEmptyCoords[Utilities.INDEX_COL]);
     }
 }

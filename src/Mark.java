@@ -4,6 +4,8 @@
 public enum Mark {
     BLANK("blank"), X("x"), O("o");
 
+    private static final String VALUE_FOR_BLANK_MARK = null;
+
     private final String markString;
 
     /**
@@ -17,9 +19,9 @@ public enum Mark {
     /**
      * @return string that represents the enum constant mark string.
      */
-    public String toString()    {
-        if(this == BLANK) {
-            return null;
+    public String toString() {
+        if (this == BLANK) {
+            return VALUE_FOR_BLANK_MARK;
         }
         return this.markString;
     }

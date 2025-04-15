@@ -9,6 +9,16 @@ public class Utilities {
     private static final Random RANDOM = new Random();
 
     /**
+     * INDEX_ROW is used to determine which index in an int[] coordination represents a row.
+     */
+    public static final int INDEX_ROW = 0;
+
+    /**
+     * INDEX_COL is used to determine which index in an int[] coordination represents a column.
+     */
+    public static final int INDEX_COL = 1;
+
+    /**
      * Calculates the longest possible streak for the given mark in the given board.
      * @param board Board to search for streak inside.
      * @param mark The mark that the streak consists of.
@@ -36,7 +46,7 @@ public class Utilities {
             }
         }
 
-        // Diagonals (↘)
+        // Diagonals - to bottom right
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 int count = 0;
@@ -47,7 +57,7 @@ public class Utilities {
             }
         }
 
-        // Diagonals (↙)
+        // Diagonals - to bottom left
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 int count = 0;
@@ -79,7 +89,14 @@ public class Utilities {
             }
         }
 
-        // randomly pick one available
+        // to prevent Utilities from crashing, we check for empty coordinates, but this case is less likely
+        // going to happen in our use case, since we choose a random available as long as the game didn't
+        // end, as long as there are empty cells on the board.
+        if (emptyCoordinates.isEmpty()) {
+            return new int[]{-1, -1};
+        }
+
+        // choose one random, and return it.
         int randomCoordsIndex = RANDOM.nextInt(emptyCoordinates.size());
         return emptyCoordinates.get(randomCoordsIndex);
     }
