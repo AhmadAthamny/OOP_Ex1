@@ -1,6 +1,8 @@
 /**
  * Game class is responsible for running a Game instance, including starting a game, managing player turns,
  * and announcing a winner/tie accordingly.
+ * @author Ahmad Athamny
+ * @see Tournament
  */
 public class Game {
     private static final int DEFAULT_REQUIRED_WIN_STREAK = 3;
@@ -104,7 +106,7 @@ public class Game {
     }
 
     private boolean isPlayerWinner(Mark currMark) {
-        if (Utilites.getLongestMarkStreak(this.currentGameBoard, currMark) >= this.winStreak) {
+        if (Utilities.getLongestMarkStreak(this.currentGameBoard, currMark) >= this.winStreak) {
             return true;
         }
         return false;

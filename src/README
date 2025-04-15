@@ -1,0 +1,25 @@
+ahmed
+315272484
+
+Question 1:
+WhateverPlayer: Picks random coordinates, if picked is marked already, it tries again until finds empty one.
+CleverPlayer: Attempts to build a streak with at least 2 marks, the first attempt he succeeds, he marks. His
+ search strategy to build the streak, is to scan the board from left to right, and do the same for each line
+ below.
+ GeniusPlayer: Attempts to build the longest possible streak: He scans the board, and adds the mark to come
+ up with the longest streak possible.
+
+ Question 2:
+ The pros of implementing players' classes with a shared interface, helps us focus on the general game/program
+  flow, and not manually handle players' types when we want to call/use them. Also, when each individual
+  player's logic/strategy is implemented separately, it makes it more readable and give us a better view and
+  control into the players' strategies, while putting all together inside the game flow or wherever we want to
+   use players, will make our code complex.
+ I used three of the four pillars: Encapsulation, Abstraction, and Polymorphism.
+
+ Question 3:
+ Utilities:
+ Description: It has a static function that given a board and a mark, it calculates the longest streak of the
+ given mark in the given board in all directions.
+ Why added it: I used the same function both in CleverPlayer and GeniusPlayer, and instead of duplicating the
+ code in both classes, I moved it to a third class "Utilities" and both players use it.

@@ -1,21 +1,28 @@
-import java.util.Random;
-
+/**
+ * Implements whatever player, an automatic Player with a basic strategy: mark a random empty cell.
+ * WhateverPlayer can be used as a Player in a single game or tournament.
+ * @see Tournament
+ * @see Game
+ * @see PlayerFactory
+ * @author Ahmad Athamny
+ */
 public class WhateverPlayer implements Player {
-    private static final Random rand = new Random();
-
+    /**
+     * Default constructor, creates the WhateverPlayer and it's ready to use.
+     */
     public WhateverPlayer() {}
 
+    /**
+     * WhateverPlayer plays a turn using his basic strategy.
+     * @param board The board that WhateverPlayer will mark his move on.
+     * @param mark The mark that WhateverPlayer will use to mark his new move.
+     */
     @Override
     public void playTurn(Board board, Mark mark) {
-        while (true) {
-            // randomize row and col
-            int randomRow = rand.nextInt(board.getSize());
-            int randomCol = rand.nextInt(board.getSize());
+        // get one random available coords
+        int[] randomEmptyCoords = Utilities.pickRandomBoardEmptyCoords(board);
 
-            // try to put mark and break if succeeds
-            if (board.putMark(mark, randomRow, randomCol)) {
-                break;
-            }
-        }
+        // mark the board
+        board.putMark(mark, randomEmptyCoords[0], randomEmptyCoords[1]);
     }
 }
