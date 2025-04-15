@@ -5,9 +5,6 @@ import java.util.Random;
  * CleverPlayer implements Player interface.
  */
 public class CleverPlayer implements Player {
-
-    private static final Random rand = new Random();
-
     /**
      * Default constructor, creates the CleverPlayer and it's ready to use.
      */
