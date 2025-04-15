@@ -104,7 +104,7 @@ public class Game {
     }
 
     private boolean isPlayerWinner(Mark currMark) {
-        if(getMarkLongestStreak(currMark) >= this.winStreak) {
+        if (Utilites.getLongestMarkStreak(this.currentGameBoard, currMark) >= this.winStreak) {
             return true;
         }
         return false;
@@ -119,51 +119,5 @@ public class Game {
             }
         }
         return true;
-    }
-
-    private int getMarkLongestStreak(Mark mark) {
-        int boardSize = getBoardSize();
-        int max = 0;
-
-        // Rows
-        for (int i = 0; i < boardSize; i++) {
-            int count = 0;
-            for (int j = 0; j < boardSize; j++) {
-                count = (this.currentGameBoard.getMark(i, j) == mark) ? count + 1 : 0;
-                max = Math.max(max, count);
-            }
-        }
-
-        // Columns
-        for (int j = 0; j < boardSize; j++) {
-            int count = 0;
-            for (int i = 0; i < boardSize; i++) {
-                count = (this.currentGameBoard.getMark(i, j) == mark) ? count + 1 : 0;
-                max = Math.max(max, count);
-            }
-        }
-
-        // Diagonals (↘)
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                int count = 0;
-                for (int d = 0; r + d < boardSize && c + d < boardSize; d++) {
-                    count = (this.currentGameBoard.getMark(r + d, c + d) == mark) ? count + 1 : 0;
-                    max = Math.max(max, count);
-                }
-            }
-        }
-
-        // Diagonals (↙)
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                int count = 0;
-                for (int d = 0; r + d < boardSize && c - d >= 0; d++) {
-                    count = (this.currentGameBoard.getMark(r + d, c - d) == mark) ? count + 1 : 0;
-                    max = Math.max(max, count);
-                }
-            }
-        }
-        return max;
     }
 }
